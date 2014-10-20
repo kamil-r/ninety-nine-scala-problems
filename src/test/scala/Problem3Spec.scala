@@ -1,4 +1,4 @@
-import org.scalatest.{BeforeAndAfter, FlatSpec, Matchers}
+import org.scalatest.{FlatSpec, Matchers}
 
 /**
  * Created by kamil on 19.10.14.
