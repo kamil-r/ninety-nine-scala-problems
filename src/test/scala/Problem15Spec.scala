@@ -13,4 +13,10 @@ class Problem15Spec extends FlatSpec with Matchers {
     duplicateN(0, List(1, 1, 2)) should be (List())
   }
 
+  it should "throw IllegalArgumentException when N is negative" in {
+    a [IllegalArgumentException] should be thrownBy {
+      duplicateN(-1, List(1, 2, 3))
+    }
+  }
+
 }

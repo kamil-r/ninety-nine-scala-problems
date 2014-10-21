@@ -3,5 +3,6 @@
  */
 object Problem15 {
   def duplicateN[T](n: Int, list: List[T]): List[T] =
-    list flatMap { e => List.fill(n)(e) }
+    if(n < 0) throw new IllegalArgumentException
+    else list flatMap { e => List.fill(n)(e) }
 }
