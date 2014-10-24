@@ -14,7 +14,7 @@ object Problem19 {
     val boundedN =
       if (list.isEmpty) 0
       else (if(n < 0) n + list.size else n) % list.size
-    (list drop boundedN) ++ (list take boundedN)
+    (list drop boundedN) ++ (list take boundedN) // instead of ++ one case use :::
   }
 
 }
