@@ -14,7 +14,7 @@ object Problem32 {
     if (y == 0) x else gcdDivide2(y, x % y)
   }
 
-  def gcdSubstract(x: Int, y: Int): Int = {
+  def gcdSubtract(x: Int, y: Int): Int = {
     val (greater, lower) = if (x >= y) (x, y) else (y, x)
     if (lower == 0) lower else gcdDivide(lower, greater - lower)
   }
