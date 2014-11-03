@@ -1,10 +1,12 @@
+package lists
+
 import org.scalatest._
 
 /**
  * Created by kamil on 25.10.14.
  */
 class Problem27Spec extends FunSuite with GivenWhenThen {
-  import Problem27._
+  import lists.Problem27._
 
   test("group3") {
     Given("input list")

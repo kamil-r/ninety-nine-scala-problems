@@ -1,8 +1,10 @@
+package lists
+
 /**
  * Created by kamil on 25.10.14.
  */
 object Problem27 {
-  import Problem26._
+  import lists.Problem26._
 
   def group3[A](list: List[A]) = {
     for {
