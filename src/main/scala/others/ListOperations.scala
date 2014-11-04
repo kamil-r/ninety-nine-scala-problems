@@ -3,7 +3,7 @@ package others
 /**
  * Created by kamil on 04.11.14.
  */
-object Permutation {
+object ListOperations {
 
 //  def permutations[A](list: List[A]): List[List[Any]] = {
 //    for {
@@ -22,5 +22,9 @@ object Permutation {
         x <- list
         xs <- permutations((list diff List(x)).toList)
       } yield x :: xs
+  }
+
+  def combinations[A](list: List[A]): List[List[A]] = {
+    list.foldLeft(List(List.empty[A])) { (acc, x) => acc ++ acc.map(_ ++ List(x))}
   }
 }
