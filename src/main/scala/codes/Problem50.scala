@@ -25,7 +25,7 @@ object Problem50 {
     @tailrec
     def huffmanRecursive[A](q: List[Tree[A]]): List[(A, String)] = q match {
       case Nil => Nil
-      case List(x) => x toCodePrefixed ""
+      case List(x) => x toCode
       case x1 :: x2 :: xs =>
         huffmanRecursive((new BranchNode(x1, x2) :: xs) sortWith(_.frequency < _.frequency))
     }
