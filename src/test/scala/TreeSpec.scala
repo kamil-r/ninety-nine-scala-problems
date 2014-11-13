@@ -18,4 +18,12 @@ class TreeSpec extends FlatSpec with Matchers {
       Node("x", Node("x"), Node("x", Node("x"), Empty)),
       Node("x", Node("x"), Node("x", Empty, Node("x")))))
   }
+
+  "isSymetric" should "check whether a given binary tree is symmetric" in {
+    Empty.isSymmetric should be (true)
+    Node("x").isSymmetric should be (true)
+    Node("x", Node("y"), Node("z")).isSymmetric should be (true)
+    Node("x", Node("y"), Empty).isSymmetric should be (false)
+    Node("x", Empty, Node("y")).isSymmetric should be (false)
+  }
 }
