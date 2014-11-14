@@ -6,12 +6,14 @@ package binary_trees
 sealed abstract class Tree[+T] {
   def isMirrorOf[T](other: Tree[T]): Boolean
   def isSymmetric: Boolean
+  def addValue[U >: T <% Ordered[U]](element: U): Tree[U]
 }
 
 case object Empty extends Tree[Nothing] {
   override def toString = "."
   override def isMirrorOf[T](other: Tree[T]): Boolean = other == Empty
   override def isSymmetric: Boolean = true
+  override def addValue[U <% Ordered[U]](element: U): Tree[U] = Node(element)
 }
 
 case class Node[+T](value: T, left: Tree[T], right: Tree[T]) extends Tree[T] {
@@ -23,6 +25,12 @@ case class Node[+T](value: T, left: Tree[T], right: Tree[T]) extends Tree[T] {
   }
 
   override def isSymmetric: Boolean = left isMirrorOf right
+
+  override def addValue[U >: T <% Ordered[U]](element: U): Tree[U] = {
+    if (value == element) this
+    else if (value < element) Node(value, left, right.addValue(element))
+    else Node(value, left.addValue(element), right)
+  }
 }
 
 object Node {
@@ -55,4 +63,7 @@ object Tree {
       } yield List(Node(value, first, second), Node(value, second, first))).flatten
     }
   }
+
+  def fromList[T](elements: List[T]): Tree[T] =
+    elements.foldLeft(Empty: Tree[T])((acc, el) => acc.addValue(el))
 }

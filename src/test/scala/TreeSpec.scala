@@ -26,4 +26,9 @@ class TreeSpec extends FlatSpec with Matchers {
     Node("x", Node("y"), Empty).isSymmetric should be (false)
     Node("x", Empty, Node("y")).isSymmetric should be (false)
   }
+
+  "addValue" should "create new tree containing value" in {
+    Tree.fromList(List(5, 3, 18, 1, 4, 12, 21)).isSymmetric should be (true)
+    Tree.fromList(List(3, 2, 5, 7, 4)).isSymmetric should be (false)
+  }
 }
