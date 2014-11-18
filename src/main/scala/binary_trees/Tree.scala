@@ -64,6 +64,6 @@ object Tree {
     }
   }
 
-  def fromList[T](elements: List[T]): Tree[T] =
+  def fromList[T <% Ordered[T]](elements: List[T]): Tree[T] =
     elements.foldLeft(Empty: Tree[T])((acc, el) => acc.addValue(el))
 }
