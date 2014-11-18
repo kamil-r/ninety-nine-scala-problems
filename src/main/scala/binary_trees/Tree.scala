@@ -67,6 +67,25 @@ object Tree {
   def symmetricBalancedTrees[T](nodes: Int, value: T): List[Tree[T]] =
     cBalanced(nodes, value) filter { _.isSymmetric }
 
+  /**
+   * In a height-balanced binary tree, the following property holds for every node: The height of its left subtree and
+   * the height of its right subtree are almost equal, which means their difference is not greater than one.
+   * Method constructs height-balanced binary trees for a given height with a supplied value for the nodes.
+   * The function generates all solutions.
+   */
+  def hBalanced[T](height: Int, value: T): List[Tree[T]] = height match {
+    case 0 => List(Empty)
+    case 1 => List(Node(value))
+    case _ => {
+      val higherSubTree = hBalanced(height - 1, value)
+      val lowerSubTree = hBalanced(height - 2, value)
+      (for {
+        lower <- lowerSubTree
+        higher <- higherSubTree
+      } yield List(Node(value, higher, higher), Node(value, higher, lower), Node(value, lower, higher))).flatten
+    }
+  }
+
   def fromList[T <% Ordered[T]](elements: List[T]): Tree[T] =
     elements.foldLeft(Empty: Tree[T])((acc, el) => acc.addValue(el))
 }

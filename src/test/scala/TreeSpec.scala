@@ -37,4 +37,14 @@ class TreeSpec extends FlatSpec with Matchers {
       Node("x", Node("x", Node("x"), Empty), Node("x", Empty, Node("x"))),
       Node("x", Node("x", Empty, Node("x")), Node("x", Node("x"), Empty))))
   }
+
+  "hBalanced" should "construct height-balanced binary trees for a given height with a supplied value for the nodes" in {
+    hBalanced(0, "x") should be (List(Empty))
+    hBalanced(1, "x") should be (List(Node("x")))
+    hBalanced(2, "x").toSet should be (Set(
+      Node("x", Node("x"), Node("x")),
+      Node("x", Node("x"), Empty),
+      Node("x", Empty, Node("x"))))
+//    hBalanced(3, "x") should be (List(Node("x", Node("x"), Node("x"))))
+  }
 }
