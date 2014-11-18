@@ -31,4 +31,10 @@ class TreeSpec extends FlatSpec with Matchers {
     Tree.fromList(List(5, 3, 18, 1, 4, 12, 21)).isSymmetric should be (true)
     Tree.fromList(List(3, 2, 5, 7, 4)).isSymmetric should be (false)
   }
+
+  "symmetricBalancedTrees" should "construct all symmetric, completely balanced binary trees with a given number of nodes" in {
+    symmetricBalancedTrees(5, "x").toSet should be (Set(
+      Node("x", Node("x", Node("x"), Empty), Node("x", Empty, Node("x"))),
+      Node("x", Node("x", Empty, Node("x")), Node("x", Node("x"), Empty))))
+  }
 }
