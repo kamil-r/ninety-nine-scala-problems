@@ -80,9 +80,16 @@ object Tree {
       val higherSubTree = hBalanced(height - 1, value)
       val lowerSubTree = hBalanced(height - 2, value)
       (for {
-        lower <- lowerSubTree
+        higher1 <- higherSubTree
+        higher2 <- higherSubTree
+      } yield Node(value, higher1, higher2)) ++
+      (for {
         higher <- higherSubTree
-      } yield List(Node(value, higher, higher), Node(value, higher, lower), Node(value, lower, higher))).flatten
+        lower <- lowerSubTree
+      } yield List(Node(value, higher, lower), Node(value, lower, higher))).flatten
+      // both solution works
+      // higherSubTree.flatMap(lTree => higherSubTree.map(rTree => Node(value, lTree, rTree))) :::
+      // higherSubTree.flatMap(lTree => lowerSubTree.flatMap(rTree => List(Node(value, lTree, rTree), Node(value, rTree, lTree))))
     }
   }
 

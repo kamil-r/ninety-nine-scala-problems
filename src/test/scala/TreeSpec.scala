@@ -45,6 +45,21 @@ class TreeSpec extends FlatSpec with Matchers {
       Node("x", Node("x"), Node("x")),
       Node("x", Node("x"), Empty),
       Node("x", Empty, Node("x"))))
-//    hBalanced(3, "x") should be (List(Node("x", Node("x"), Node("x"))))
+    hBalanced(3, "x").toSet should be (Set(
+      Node("x", Node("x", Node("x"), Empty), Node("x")),
+      Node("x", Node("x", Node("x"), Empty), Node("x", Node("x"), Empty)),
+      Node("x", Node("x", Node("x"), Empty), Node("x", Empty, Node("x"))),
+      Node("x", Node("x", Node("x"), Empty), Node("x", Node("x"), Node("x"))),
+      Node("x", Node("x", Empty, Node("x")), Node("x")),
+      Node("x", Node("x", Empty, Node("x")), Node("x", Node("x"), Empty)),
+      Node("x", Node("x", Empty, Node("x")), Node("x", Empty, Node("x"))),
+      Node("x", Node("x", Empty, Node("x")), Node("x", Node("x"), Node("x"))),
+      Node("x", Node("x", Node("x"), Node("x")), Node("x")),
+      Node("x", Node("x", Node("x"), Node("x")), Node("x", Node("x"), Empty)),
+      Node("x", Node("x", Node("x"), Node("x")), Node("x", Empty, Node("x"))),
+      Node("x", Node("x", Node("x"), Node("x")), Node("x", Node("x"), Node("x"))),
+      Node("x", Node("x"), Node("x", Node("x"), Empty)),
+      Node("x", Node("x"), Node("x", Empty, Node("x"))),
+      Node("x", Node("x"), Node("x", Node("x"), Node("x")))))
   }
 }
