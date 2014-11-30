@@ -7,6 +7,8 @@ sealed abstract class Tree[+T] {
   def isMirrorOf[T](other: Tree[T]): Boolean
   def isSymmetric: Boolean
   def addValue[U >: T <% Ordered[U]](element: U): Tree[U]
+  def size: Int
+  def height: Int
 }
 
 case object Empty extends Tree[Nothing] {
@@ -14,6 +16,8 @@ case object Empty extends Tree[Nothing] {
   override def isMirrorOf[T](other: Tree[T]): Boolean = other == Empty
   override def isSymmetric: Boolean = true
   override def addValue[U <% Ordered[U]](element: U): Tree[U] = Node(element)
+  override def size: Int = 0
+  override def height: Int = 0
 }
 
 case class Node[+T](value: T, left: Tree[T], right: Tree[T]) extends Tree[T] {
@@ -31,6 +35,10 @@ case class Node[+T](value: T, left: Tree[T], right: Tree[T]) extends Tree[T] {
     else if (value < element) Node(value, left, right.addValue(element))
     else Node(value, left.addValue(element), right)
   }
+
+  override def size: Int = 1 + left.size + right.size
+
+  override def height: Int = 1 + left.height.max(right.height)
 }
 
 object Node {
@@ -95,4 +103,21 @@ object Tree {
 
   def fromList[T <% Ordered[T]](elements: List[T]): Tree[T] =
     elements.foldLeft(Empty: Tree[T])((acc, el) => acc.addValue(el))
+
+  /**
+   * Computes minimal number of nodes that a height balanced tree with a given height may contain.
+   *
+   * @param height height of a tree
+   * @return minimal number of nodes
+   */
+  def minHbalNodes(height: Int): Int = height match {
+    case h if h < 1 => 0
+    case 1 => 1
+    case _ => 1 + minHbalNodes(height-1) + minHbalNodes(height-2) // 1 + "left" and "right" subtrees
+  }
+
+  /**
+   * Returns maximum height of a height-balanced binary tree with given number of nodes.
+   */
+  def maxHbalHeight(nodes: Int): Int = ???
 }

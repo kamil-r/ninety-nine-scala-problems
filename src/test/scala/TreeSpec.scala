@@ -62,4 +62,22 @@ class TreeSpec extends FlatSpec with Matchers {
       Node("x", Node("x"), Node("x", Empty, Node("x"))),
       Node("x", Node("x"), Node("x", Node("x"), Node("x")))))
   }
+
+  "size" should "return number of nodes in tree" in {
+    Empty.size should be (0)
+    Node("x").size should be (1)
+    Node("x", Empty, Node("x", Node("x", Empty), Empty)).size should be (3)
+  }
+
+  "minHbalNodes" should "return number of nodes of a minimal height-balanced tree" in {
+    minHbalNodes(0) should be (0)
+    minHbalNodes(1) should be (1)
+    minHbalNodes(2) should be (2)
+    minHbalNodes(3) should be (4)
+    ((4 to 5) flatMap { h =>
+        hBalanced(h, "x").sortWith(_.size < _.size).take(1)
+      }).foreach({ t =>
+        minHbalNodes(t.height) should be (t.size)
+      })
+  }
 }
